@@ -7,13 +7,20 @@
   
   <title>碎语说</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动 因此推荐页有大量的图片，占用了大量的内存，需要做如下优化 #优化项1.进入推荐页时，只加载Scrollview中可见的图片2.离开推荐页时，释放Scrollview中不可见的图片3.点击图片进入详情页后，释放全部图片4.Scr">
+<meta property="og:type" content="article">
 <meta property="og:title" content="碎语说">
-<meta property="og:url" content="http://cailiwu.cn/index.html">
+<meta property="og:url" content="http://cailiwu.cn/2019/01/19/Android/判断Fragment是否对用户可见/index.html">
 <meta property="og:site_name" content="碎语说">
+<meta property="og:description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动 因此推荐页有大量的图片，占用了大量的内存，需要做如下优化 #优化项1.进入推荐页时，只加载Scrollview中可见的图片2.离开推荐页时，释放Scrollview中不可见的图片3.点击图片进入详情页后，释放全部图片4.Scr">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-5aea0c019bcd1489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-f4a01fca4956ad26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
+<meta property="og:updated_time" content="2019-01-19T09:21:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="碎语说">
+<meta name="twitter:description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动 因此推荐页有大量的图片，占用了大量的内存，需要做如下优化 #优化项1.进入推荐页时，只加载Scrollview中可见的图片2.离开推荐页时，释放Scrollview中不可见的图片3.点击图片进入详情页后，释放全部图片4.Scr">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2695326-5aea0c019bcd1489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
   
     <link rel="alternate" href="/atom.xml" title="碎语说" type="application/atom+xml">
   
@@ -60,133 +67,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Android/Android性能分析的几种方法" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/19/Android/Android性能分析的几种方法/" class="article-date">
-  <time datetime="2019-01-19T09:21:15.000Z" itemprop="datePublished">2019-01-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#Android性能分析的几种方法 </p>
-<ol>
-<li>通过Memory Monitor 查找内存泄漏<br>Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况<br><img src="http://upload-images.jianshu.io/upload_images/2695326-5b0bd9f7b33776b3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
-</ol>
-<p>这个图是从主页反复进入选择APP页面过程抓取的heap dump信息，通过搜索SelectAppActivity发现存在多个实例，存在内存泄漏无疑,要查找具体泄漏的原因需要用到mat工具。<br>将刚才的heap dump导出文件，然后通过android 命令行工具hprof-conv转换为标准的heap dump，导入mat查看<br><img src="http://upload-images.jianshu.io/upload_images/2695326-0ff2814e4f690e01.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>然后通过path to GC Roots找到引用路径，发现是EventBus未注销引起的泄漏<br><img src="http://upload-images.jianshu.io/upload_images/2695326-b036cdac0f803812.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2695326-d41f36abf614fd18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<ol start="2">
-<li>LeakCanary<br>LeakCanary是square公司出的一个java/Android内存泄漏检测工具，具体使用见github：<a href="https://github.com/square/leakcanary" target="_blank" rel="noopener">https://github.com/square/leakcanary</a></li>
-</ol>
-<p>在apk运行过程中发生内存泄漏<br><img src="http://upload-images.jianshu.io/upload_images/2695326-479ead933e5a656b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<ol start="3">
-<li>使用Android Device Monitor中的TraceView分析性能<br>TraceView有两种使用方法：</li>
-</ol>
-<ul>
-<li>方法级别：在代码中手动开启，统计某一函数的耗时，会在sdcard中输出trace文件，导入ddms即可查看<br><code>Debug.startMethodTracing(&#39;tracepath&#39;)
-Debug.stopMethodTracing()</code></li>
-<li>时间段级别：通过ddms的Method Profiling或者Android Profile CPU中的method trace开启，用于统计一段时间内的函数耗时</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/2695326-649221cb0088621d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>比如分析list滚动性能，通过incl cpu time / call total 计算每个onBindingViewHolder耗时，来查看是否有阻塞操作<br><img src="http://upload-images.jianshu.io/upload_images/2695326-3f0aa78574fcf539.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://cailiwu.cn/2019/01/19/Android/Android性能分析的几种方法/" data-id="cjr39l6el0001jv48etc77l34" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Android/UML图理解" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/19/Android/UML图理解/" class="article-date">
-  <time datetime="2019-01-19T09:21:15.000Z" itemprop="datePublished">2019-01-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>UML图是理解面向对象语言代码的利器。在开发中经常会使用到一些第三方库，在文档缺失的情况下，想快速了解代码结构，可以通过工具快速生成UML图来加速理解。<br>我常用的开发工具是android studio，它有一个插件叫做simpleUML，可以很方便的生成UML图。<br><img src="https://upload-images.jianshu.io/upload_images/2695326-6abec69f1b96d2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AndroidShowClassDiagram.png"></p>
-<p>#理解UML</p>
-<ol>
-<li>uml图里面有6种关系，按照强弱排序是：</li>
-<li>泛化（继承）= 实现 &gt; 组合 &gt; 聚合 &gt; 关联 &gt; 依赖</li>
-<li>继承和实现比较好理解，对应java语言就是extends和implements。</li>
-<li>组合、聚合都是关联的一种，代码层面表示就是成员变量，要区分它们只能从逻辑上来。<blockquote>
-<p>组合表示整体和部分的关系，这两者是不可分割的，例如鸽子和翅膀<br>聚合也表示整体和部分的关系，但是弱一些，两者可分离，例如鸽子和鸽群<br>关联是一种拥有关系，例如企鹅和气候</p>
-</blockquote>
-</li>
-<li>依赖是一种使用关系，代码层面就是局部变量、方法参数或静态方法<br>下面这张图描述了这6种关系<br><img src="https://upload-images.jianshu.io/upload_images/2695326-0ab21a4cf17b0c1c.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="UML-泛化实现组合聚合关联依赖.gif"></li>
-</ol>
-<blockquote>
-<p>参考：<a href="https://blog.csdn.net/tianhai110/article/details/6339565" target="_blank" rel="noopener">https://blog.csdn.net/tianhai110/article/details/6339565</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://cailiwu.cn/2019/01/19/Android/UML图理解/" data-id="cjr39l6em0002jv48k0i20f0v" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Android/Ubuntu14-04-Android-源码编译相关" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/" class="article-date">
-  <time datetime="2019-01-19T09:21:15.000Z" itemprop="datePublished">2019-01-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考：<br><a href="http://www.jianshu.com/p/367f0886e62b" target="_blank" rel="noopener">http://www.jianshu.com/p/367f0886e62b</a><br><a href="https://source.android.com/source/initializing" target="_blank" rel="noopener">https://source.android.com/source/initializing</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/</a></p>
-<p>1、环境相关<br>首先保证电脑配置要够，cpu最好是4核以上的，因为编译的时候很耗费cpu，如果是4核双线程的，编译的时候可以起16个线程，make -j16，大大加快编译速度<br>其次就是内存，最好是16G，如果是在虚拟机里面编译的话要开始swap分区，大小要超过16G<br>最后就是硬盘，如果只编译一个版本的话150G是要得，多版本就200G+了。<br>2、编译环境配置<br>java配置<br>sudo add-apt-repository ppa:openjdk-r/ppa<br>sudo apt-get update<br>sudo apt-get install openjdk-8-jdk<br>如果装有多个版本的java，切换java版本<br>sudo update-alternatives –config java<br>sudo update-alternatives –config javac<br>sudo update-alternatives –config javadoc<br>编译各Android版本需要的java版本如下<br>Android版本    编译要求的JDK版本<br>AOSP的Android主线    OpenJDK 8<br>Android 5.x至android 6.0    OpenJDK 7<br>Android 2.3.x至Android 4.4.x    Oracle JDK 6<br>Android 1.5至Android 2.2.x    Oracle JDK 5</p>
-<p>配置编译工具链<br>$ sudo apt-get install git-core gnupg flex bison gperf build-essential \<br>  zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 \<br>  lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache \<br>  libgl1-mesa-dev libxml2-utils xsltproc unzip</p>
-<p>3、源码下载<br>下载 repo 工具:</p>
-<p>mkdir ~/bin<br>PATH=~/bin:$PATH<br>curl <a href="https://mirrors.tuna.tsinghua.edu.cn/git/git-repo" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</a> -o repo &gt; ~/bin/repo<br>chmod a+x ~/bin/repo<br>建立工作目录:<br>mkdir WORKING_DIRECTORYcd WORKING_DIRECTORY</p>
-<p>初始化仓库:<br>repo init -u <a href="https://aosp.tuna.tsinghua.edu.cn/platform/manifest" target="_blank" rel="noopener">https://aosp.tuna.tsinghua.edu.cn/platform/manifest</a></p>
-<p><strong>如果提示无法连接到 gerrit.googlesource.com，请参照<a href="https://mirrors.tuna.tsinghua.edu.cn/help/git-repo" target="_blank" rel="noopener">git-repo的帮助页面</a>的更新一节。</strong><br>如果需要某个特定的 Android 版本(<a href="https://source.android.com/source/build-numbers.html#source-code-tags-and-builds" target="_blank" rel="noopener">列表</a>)：<br>repo init -u <a href="https://aosp.tuna.tsinghua.edu.cn/platform/manifest" target="_blank" rel="noopener">https://aosp.tuna.tsinghua.edu.cn/platform/manifest</a> -b android-4.0.1_r1</p>
-<p>同步源码树（以后只需执行这条命令来同步）：<br>repo sync</p>
-<p>4、编译源码<br>初始化编译环境<br>source build/envsetup.sh<br>选择编译目标<br>lunch aosp_arm64-eng<br>开始编译<br>make -j16<br>运行模拟器<br>emulator</p>
-<p>5、问题<br>内存不足<br>在编译命令之前,修改prebuilts/sdk/tools/jack-admin文件,找到文件中的这一行:<br>JACK_SERVER_COMMAND=”java -Djava.io.tmpdir=$TMPDIR $JACK_SERVER_VM_ARGUMENTS -cp $LAUNCHER_JAR $LAUNCHER_NAME”<br>然后在该行添加-Xmx4096m,如:<br>JACK_SERVER_COMMAND=”java -Djava.io.tmpdir=$TMPDIR $JACK_SERVER_VM_ARGUMENTS -Xmx4096m -cp $LAUNCHER_JAR $LAUNCHER_NAME”</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://cailiwu.cn/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/" data-id="cjr39l6en0003jv48zria0j18" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Android/判断Fragment是否对用户可见" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-Android/判断Fragment是否对用户可见" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/19/Android/判断Fragment是否对用户可见/" class="article-date">
   <time datetime="2019-01-19T09:21:15.000Z" itemprop="datePublished">2019-01-19</time>
@@ -246,56 +127,28 @@ Debug.stopMethodTracing()</code></li>
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/19/hello-world/" class="article-date">
-  <time datetime="2019-01-19T07:54:42.000Z" itemprop="datePublished">2019-01-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          (no title)
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/19/hello-world/">Hello World</a>
-    </h1>
   
+    <a href="/2019/01/19/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://cailiwu.cn/2019/01/19/hello-world/" data-id="cjr39l6e50000jv48ckjk53ea" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         

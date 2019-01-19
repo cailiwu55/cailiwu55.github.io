@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>碎语说</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="UML图是理解面向对象语言代码的利器。在开发中经常会使用到一些第三方库，在文档缺失的情况下，想快速了解代码结构，可以通过工具快速生成UML图来加速理解。我常用的开发工具是android studio，它有一个插件叫做simpleUML，可以很方便的生成UML图。 #理解UML  uml图里面有6种关系，按照强弱排序是： 泛化（继承）= 实现 &amp;gt; 组合 &amp;gt; 聚合 &amp;gt; 关联 &amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="碎语说">
+<meta property="og:url" content="http://cailiwu.cn/2019/01/19/Android/UML图理解/index.html">
+<meta property="og:site_name" content="碎语说">
+<meta property="og:description" content="UML图是理解面向对象语言代码的利器。在开发中经常会使用到一些第三方库，在文档缺失的情况下，想快速了解代码结构，可以通过工具快速生成UML图来加速理解。我常用的开发工具是android studio，它有一个插件叫做simpleUML，可以很方便的生成UML图。 #理解UML  uml图里面有6种关系，按照强弱排序是： 泛化（继承）= 实现 &amp;gt; 组合 &amp;gt; 聚合 &amp;gt; 关联 &amp;gt;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2695326-6abec69f1b96d2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2695326-0ab21a4cf17b0c1c.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-01-19T09:21:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="碎语说">
+<meta name="twitter:description" content="UML图是理解面向对象语言代码的利器。在开发中经常会使用到一些第三方库，在文档缺失的情况下，想快速了解代码结构，可以通过工具快速生成UML图来加速理解。我常用的开发工具是android studio，它有一个插件叫做simpleUML，可以很方便的生成UML图。 #理解UML  uml图里面有6种关系，按照强弱排序是： 泛化（继承）= 实现 &amp;gt; 组合 &amp;gt; 聚合 &amp;gt; 关联 &amp;gt;">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2695326-6abec69f1b96d2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternate" href="/atom.xml" title="碎语说" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">碎语说</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://cailiwu.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/UML图理解" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/19/Android/UML图理解/" class="article-date">
+  <time datetime="2019-01-19T09:21:15.000Z" itemprop="datePublished">2019-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>UML图是理解面向对象语言代码的利器。在开发中经常会使用到一些第三方库，在文档缺失的情况下，想快速了解代码结构，可以通过工具快速生成UML图来加速理解。<br>我常用的开发工具是android studio，它有一个插件叫做simpleUML，可以很方便的生成UML图。<br><img src="https://upload-images.jianshu.io/upload_images/2695326-6abec69f1b96d2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AndroidShowClassDiagram.png"></p>
+<p>#理解UML</p>
+<ol>
+<li>uml图里面有6种关系，按照强弱排序是：</li>
+<li>泛化（继承）= 实现 &gt; 组合 &gt; 聚合 &gt; 关联 &gt; 依赖</li>
+<li>继承和实现比较好理解，对应java语言就是extends和implements。</li>
+<li>组合、聚合都是关联的一种，代码层面表示就是成员变量，要区分它们只能从逻辑上来。<blockquote>
+<p>组合表示整体和部分的关系，这两者是不可分割的，例如鸽子和翅膀<br>聚合也表示整体和部分的关系，但是弱一些，两者可分离，例如鸽子和鸽群<br>关联是一种拥有关系，例如企鹅和气候</p>
+</blockquote>
+</li>
+<li>依赖是一种使用关系，代码层面就是局部变量、方法参数或静态方法<br>下面这张图描述了这6种关系<br><img src="https://upload-images.jianshu.io/upload_images/2695326-0ab21a4cf17b0c1c.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="UML-泛化实现组合聚合关联依赖.gif"></li>
+</ol>
+<blockquote>
+<p>参考：<a href="https://blog.csdn.net/tianhai110/article/details/6339565" target="_blank" rel="noopener">https://blog.csdn.net/tianhai110/article/details/6339565</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://cailiwu.cn/2019/01/19/Android/UML图理解/" data-id="cjr39l6em0002jv48k0i20f0v" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/01/19/Android/Android性能分析的几种方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/19/Android/Android性能分析的几种方法/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/19/Android/UML图理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/19/Android/判断Fragment是否对用户可见/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/19/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 cailiwu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
