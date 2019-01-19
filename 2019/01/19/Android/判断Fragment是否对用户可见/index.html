@@ -5,20 +5,20 @@
   
 
   
-  <title>碎语说</title>
+  <title>判断Fragment是否对用户可见 | 碎语说</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动 因此推荐页有大量的图片，占用了大量的内存，需要做如下优化 #优化项1.进入推荐页时，只加载Scrollview中可见的图片2.离开推荐页时，释放Scrollview中不可见的图片3.点击图片进入详情页后，释放全部图片4.Scr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="碎语说">
+<meta property="og:title" content="判断Fragment是否对用户可见">
 <meta property="og:url" content="http://cailiwu.cn/2019/01/19/Android/判断Fragment是否对用户可见/index.html">
 <meta property="og:site_name" content="碎语说">
 <meta property="og:description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动 因此推荐页有大量的图片，占用了大量的内存，需要做如下优化 #优化项1.进入推荐页时，只加载Scrollview中可见的图片2.离开推荐页时，释放Scrollview中不可见的图片3.点击图片进入详情页后，释放全部图片4.Scr">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-5aea0c019bcd1489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-f4a01fca4956ad26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
-<meta property="og:updated_time" content="2019-01-19T09:21:15.000Z">
+<meta property="og:updated_time" content="2019-01-19T09:31:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="碎语说">
+<meta name="twitter:title" content="判断Fragment是否对用户可见">
 <meta name="twitter:description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动 因此推荐页有大量的图片，占用了大量的内存，需要做如下优化 #优化项1.进入推荐页时，只加载Scrollview中可见的图片2.离开推荐页时，释放Scrollview中不可见的图片3.点击图片进入详情页后，释放全部图片4.Scr">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2695326-5aea0c019bcd1489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
   
@@ -77,6 +77,16 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      判断Fragment是否对用户可见
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <p>#引子<br>最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。</p>
@@ -134,7 +144,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          (no title)
+          Ubuntu14.04 Android 源码编译相关
         
       </div>
     </a>
@@ -183,15 +193,15 @@
           </li>
         
           <li>
-            <a href="/2019/01/19/Android/UML图理解/">(no title)</a>
+            <a href="/2019/01/19/Android/UML图理解/">UML图理解</a>
           </li>
         
           <li>
-            <a href="/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/">(no title)</a>
+            <a href="/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/">Ubuntu14.04 Android 源码编译相关</a>
           </li>
         
           <li>
-            <a href="/2019/01/19/Android/判断Fragment是否对用户可见/">(no title)</a>
+            <a href="/2019/01/19/Android/判断Fragment是否对用户可见/">判断Fragment是否对用户可见</a>
           </li>
         
           <li>
