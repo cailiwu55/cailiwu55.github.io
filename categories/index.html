@@ -94,17 +94,14 @@
 
 
 
-<meta name="description" content="参考：http://www.jianshu.com/p/367f0886e62bhttps://source.android.com/source/initializinghttps://mirrors.tuna.tsinghua.edu.cn/help/AOSP/ 1、环境相关首先保证电脑配置要够，cpu最好是4核以上的，因为编译的时候很耗费cpu，如果是4核双线程的，编译的时候可以起16个线程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu14.04 Android 源码编译相关">
-<meta property="og:url" content="http://cailiwu.cn/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://cailiwu.cn/categories/index.html">
 <meta property="og:site_name" content="碎语说">
-<meta property="og:description" content="参考：http://www.jianshu.com/p/367f0886e62bhttps://source.android.com/source/initializinghttps://mirrors.tuna.tsinghua.edu.cn/help/AOSP/ 1、环境相关首先保证电脑配置要够，cpu最好是4核以上的，因为编译的时候很耗费cpu，如果是4核双线程的，编译的时候可以起16个线程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-19T09:31:18.000Z">
+<meta property="og:updated_time" content="2019-01-21T06:14:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu14.04 Android 源码编译相关">
-<meta name="twitter:description" content="参考：http://www.jianshu.com/p/367f0886e62bhttps://source.android.com/source/initializinghttps://mirrors.tuna.tsinghua.edu.cn/help/AOSP/ 1、环境相关首先保证电脑配置要够，cpu最好是4核以上的，因为编译的时候很耗费cpu，如果是4核双线程的，编译的时候可以起16个线程">
+<meta name="twitter:title" content="categories">
 
 
 
@@ -133,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://cailiwu.cn/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/">
+  <link rel="canonical" href="http://cailiwu.cn/categories/">
 
 
 
 
 
-  <title>Ubuntu14.04 Android 源码编译相关 | 碎语说</title>
+  <title>categories | 碎语说</title>
   
 
 
@@ -282,151 +279,33 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cailiwu.cn/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cailiwu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="碎语说">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">Ubuntu14.04 Android 源码编译相关</h1>
-        
+	<h1 class="post-title" itemprop="name headline">categories</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-19T17:21:15+08:00">
-                2019-01-19
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <p>参考：<br><a href="http://www.jianshu.com/p/367f0886e62b" target="_blank" rel="noopener">http://www.jianshu.com/p/367f0886e62b</a><br><a href="https://source.android.com/source/initializing" target="_blank" rel="noopener">https://source.android.com/source/initializing</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/</a></p>
-<p>1、环境相关<br>首先保证电脑配置要够，cpu最好是4核以上的，因为编译的时候很耗费cpu，如果是4核双线程的，编译的时候可以起16个线程，make -j16，大大加快编译速度<br>其次就是内存，最好是16G，如果是在虚拟机里面编译的话要开始swap分区，大小要超过16G<br>最后就是硬盘，如果只编译一个版本的话150G是要得，多版本就200G+了。<br>2、编译环境配置<br>java配置<br>sudo add-apt-repository ppa:openjdk-r/ppa<br>sudo apt-get update<br>sudo apt-get install openjdk-8-jdk<br>如果装有多个版本的java，切换java版本<br>sudo update-alternatives –config java<br>sudo update-alternatives –config javac<br>sudo update-alternatives –config javadoc<br>编译各Android版本需要的java版本如下<br>Android版本    编译要求的JDK版本<br>AOSP的Android主线    OpenJDK 8<br>Android 5.x至android 6.0    OpenJDK 7<br>Android 2.3.x至Android 4.4.x    Oracle JDK 6<br>Android 1.5至Android 2.2.x    Oracle JDK 5</p>
-<p>配置编译工具链<br>$ sudo apt-get install git-core gnupg flex bison gperf build-essential \<br>  zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 \<br>  lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache \<br>  libgl1-mesa-dev libxml2-utils xsltproc unzip</p>
-<p>3、源码下载<br>下载 repo 工具:</p>
-<p>mkdir ~/bin<br>PATH=~/bin:$PATH<br>curl <a href="https://mirrors.tuna.tsinghua.edu.cn/git/git-repo" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</a> -o repo &gt; ~/bin/repo<br>chmod a+x ~/bin/repo<br>建立工作目录:<br>mkdir WORKING_DIRECTORYcd WORKING_DIRECTORY</p>
-<p>初始化仓库:<br>repo init -u <a href="https://aosp.tuna.tsinghua.edu.cn/platform/manifest" target="_blank" rel="noopener">https://aosp.tuna.tsinghua.edu.cn/platform/manifest</a></p>
-<p><strong>如果提示无法连接到 gerrit.googlesource.com，请参照<a href="https://mirrors.tuna.tsinghua.edu.cn/help/git-repo" target="_blank" rel="noopener">git-repo的帮助页面</a>的更新一节。</strong><br>如果需要某个特定的 Android 版本(<a href="https://source.android.com/source/build-numbers.html#source-code-tags-and-builds" target="_blank" rel="noopener">列表</a>)：<br>repo init -u <a href="https://aosp.tuna.tsinghua.edu.cn/platform/manifest" target="_blank" rel="noopener">https://aosp.tuna.tsinghua.edu.cn/platform/manifest</a> -b android-4.0.1_r1</p>
-<p>同步源码树（以后只需执行这条命令来同步）：<br>repo sync</p>
-<p>4、编译源码<br>初始化编译环境<br>source build/envsetup.sh<br>选择编译目标<br>lunch aosp_arm64-eng<br>开始编译<br>make -j16<br>运行模拟器<br>emulator</p>
-<p>5、问题<br>内存不足<br>在编译命令之前,修改prebuilts/sdk/tools/jack-admin文件,找到文件中的这一行:<br>JACK_SERVER_COMMAND=”java -Djava.io.tmpdir=$TMPDIR $JACK_SERVER_VM_ARGUMENTS -cp $LAUNCHER_JAR $LAUNCHER_NAME”<br>然后在该行添加-Xmx4096m,如:<br>JACK_SERVER_COMMAND=”java -Djava.io.tmpdir=$TMPDIR $JACK_SERVER_VM_ARGUMENTS -Xmx4096m -cp $LAUNCHER_JAR $LAUNCHER_NAME”</p>
-
+      <div class="post-body">
+        
+        
+          
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/01/19/Android/判断Fragment是否对用户可见/" rel="next" title="判断Fragment是否对用户可见">
-                <i class="fa fa-chevron-left"></i> 判断Fragment是否对用户可见
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/19/Android/UML图理解/" rel="prev" title="UML图理解">
-                UML图理解 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
@@ -615,10 +494,10 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-
+  
 
   
 
