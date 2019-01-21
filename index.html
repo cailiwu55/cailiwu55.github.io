@@ -330,28 +330,18 @@
       
         
           
-            <ol>
-<li>通过Memory Monitor 查找内存泄漏<br>Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况<br><img src="http://upload-images.jianshu.io/upload_images/2695326-5b0bd9f7b33776b3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
-</ol>
-<p>这个图是从主页反复进入选择APP页面过程抓取的heap dump信息，通过搜索SelectAppActivity发现存在多个实例，存在内存泄漏无疑,要查找具体泄漏的原因需要用到mat工具。<br>将刚才的heap dump导出文件，然后通过android 命令行工具hprof-conv转换为标准的heap dump，导入mat查看<br><img src="http://upload-images.jianshu.io/upload_images/2695326-0ff2814e4f690e01.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>然后通过path to GC Roots找到引用路径，发现是EventBus未注销引起的泄漏<br><img src="http://upload-images.jianshu.io/upload_images/2695326-b036cdac0f803812.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2695326-d41f36abf614fd18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<ol start="2">
-<li>LeakCanary<br>LeakCanary是square公司出的一个java/Android内存泄漏检测工具，具体使用见github：<a href="https://github.com/square/leakcanary" target="_blank" rel="noopener">https://github.com/square/leakcanary</a></li>
-</ol>
-<p>在apk运行过程中发生内存泄漏<br><img src="http://upload-images.jianshu.io/upload_images/2695326-479ead933e5a656b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<ol start="3">
-<li>使用Android Device Monitor中的TraceView分析性能<br>TraceView有两种使用方法：</li>
-</ol>
-<ul>
-<li>方法级别：在代码中手动开启，统计某一函数的耗时，会在sdcard中输出trace文件，导入ddms即可查看<br><code>Debug.startMethodTracing(&#39;tracepath&#39;)
-Debug.stopMethodTracing()</code></li>
-<li>时间段级别：通过ddms的Method Profiling或者Android Profile CPU中的method trace开启，用于统计一段时间内的函数耗时</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/2695326-649221cb0088621d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-<p>比如分析list滚动性能，通过incl cpu time / call total 计算每个onBindingViewHolder耗时，来查看是否有阻塞操作<br><img src="http://upload-images.jianshu.io/upload_images/2695326-3f0aa78574fcf539.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
-
           
+通过Memory Monitor 查找内存泄漏Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况
+
+这个图是从主页反复进入选择APP页面过程抓取的heap dump信息，通过搜索Se
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/19/Android/Android性能分析的几种方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -479,23 +469,18 @@ Debug.stopMethodTracing()</code></li>
       
         
           
-            <p>UML图是理解面向对象语言代码的利器。在开发中经常会使用到一些第三方库，在文档缺失的情况下，想快速了解代码结构，可以通过工具快速生成UML图来加速理解。<br>我常用的开发工具是android studio，它有一个插件叫做simpleUML，可以很方便的生成UML图。<br><img src="https://upload-images.jianshu.io/upload_images/2695326-6abec69f1b96d2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AndroidShowClassDiagram.png"></p>
-<p>#理解UML</p>
-<ol>
-<li>uml图里面有6种关系，按照强弱排序是：</li>
-<li>泛化（继承）= 实现 &gt; 组合 &gt; 聚合 &gt; 关联 &gt; 依赖</li>
-<li>继承和实现比较好理解，对应java语言就是extends和implements。</li>
-<li>组合、聚合都是关联的一种，代码层面表示就是成员变量，要区分它们只能从逻辑上来。<blockquote>
-<p>组合表示整体和部分的关系，这两者是不可分割的，例如鸽子和翅膀<br>聚合也表示整体和部分的关系，但是弱一些，两者可分离，例如鸽子和鸽群<br>关联是一种拥有关系，例如企鹅和气候</p>
-</blockquote>
-</li>
-<li>依赖是一种使用关系，代码层面就是局部变量、方法参数或静态方法<br>下面这张图描述了这6种关系<br><img src="https://upload-images.jianshu.io/upload_images/2695326-0ab21a4cf17b0c1c.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="UML-泛化实现组合聚合关联依赖.gif"></li>
-</ol>
-<blockquote>
-<p>参考：<a href="https://blog.csdn.net/tianhai110/article/details/6339565" target="_blank" rel="noopener">https://blog.csdn.net/tianhai110/article/details/6339565</a></p>
-</blockquote>
+          UML图是理解面向对象语言代码的利器。在开发中经常会使用到一些第三方库，在文档缺失的情况下，想快速了解代码结构，可以通过工具快速生成UML图来加速理解。我常用的开发工具是android studio，它有一个插件叫做simpleUML，可以很方便的生成UML图。
+#理解UML
 
-          
+uml图里面有6种关
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/19/Android/UML图理解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -623,18 +608,16 @@ Debug.stopMethodTracing()</code></li>
       
         
           
-            <p>参考：<br><a href="http://www.jianshu.com/p/367f0886e62b" target="_blank" rel="noopener">http://www.jianshu.com/p/367f0886e62b</a><br><a href="https://source.android.com/source/initializing" target="_blank" rel="noopener">https://source.android.com/source/initializing</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/</a></p>
-<p>1、环境相关<br>首先保证电脑配置要够，cpu最好是4核以上的，因为编译的时候很耗费cpu，如果是4核双线程的，编译的时候可以起16个线程，make -j16，大大加快编译速度<br>其次就是内存，最好是16G，如果是在虚拟机里面编译的话要开始swap分区，大小要超过16G<br>最后就是硬盘，如果只编译一个版本的话150G是要得，多版本就200G+了。<br>2、编译环境配置<br>java配置<br>sudo add-apt-repository ppa:openjdk-r/ppa<br>sudo apt-get update<br>sudo apt-get install openjdk-8-jdk<br>如果装有多个版本的java，切换java版本<br>sudo update-alternatives –config java<br>sudo update-alternatives –config javac<br>sudo update-alternatives –config javadoc<br>编译各Android版本需要的java版本如下<br>Android版本    编译要求的JDK版本<br>AOSP的Android主线    OpenJDK 8<br>Android 5.x至android 6.0    OpenJDK 7<br>Android 2.3.x至Android 4.4.x    Oracle JDK 6<br>Android 1.5至Android 2.2.x    Oracle JDK 5</p>
-<p>配置编译工具链<br>$ sudo apt-get install git-core gnupg flex bison gperf build-essential \<br>  zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 \<br>  lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev ccache \<br>  libgl1-mesa-dev libxml2-utils xsltproc unzip</p>
-<p>3、源码下载<br>下载 repo 工具:</p>
-<p>mkdir ~/bin<br>PATH=~/bin:$PATH<br>curl <a href="https://mirrors.tuna.tsinghua.edu.cn/git/git-repo" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/git/git-repo</a> -o repo &gt; ~/bin/repo<br>chmod a+x ~/bin/repo<br>建立工作目录:<br>mkdir WORKING_DIRECTORYcd WORKING_DIRECTORY</p>
-<p>初始化仓库:<br>repo init -u <a href="https://aosp.tuna.tsinghua.edu.cn/platform/manifest" target="_blank" rel="noopener">https://aosp.tuna.tsinghua.edu.cn/platform/manifest</a></p>
-<p><strong>如果提示无法连接到 gerrit.googlesource.com，请参照<a href="https://mirrors.tuna.tsinghua.edu.cn/help/git-repo" target="_blank" rel="noopener">git-repo的帮助页面</a>的更新一节。</strong><br>如果需要某个特定的 Android 版本(<a href="https://source.android.com/source/build-numbers.html#source-code-tags-and-builds" target="_blank" rel="noopener">列表</a>)：<br>repo init -u <a href="https://aosp.tuna.tsinghua.edu.cn/platform/manifest" target="_blank" rel="noopener">https://aosp.tuna.tsinghua.edu.cn/platform/manifest</a> -b android-4.0.1_r1</p>
-<p>同步源码树（以后只需执行这条命令来同步）：<br>repo sync</p>
-<p>4、编译源码<br>初始化编译环境<br>source build/envsetup.sh<br>选择编译目标<br>lunch aosp_arm64-eng<br>开始编译<br>make -j16<br>运行模拟器<br>emulator</p>
-<p>5、问题<br>内存不足<br>在编译命令之前,修改prebuilts/sdk/tools/jack-admin文件,找到文件中的这一行:<br>JACK_SERVER_COMMAND=”java -Djava.io.tmpdir=$TMPDIR $JACK_SERVER_VM_ARGUMENTS -cp $LAUNCHER_JAR $LAUNCHER_NAME”<br>然后在该行添加-Xmx4096m,如:<br>JACK_SERVER_COMMAND=”java -Djava.io.tmpdir=$TMPDIR $JACK_SERVER_VM_ARGUMENTS -Xmx4096m -cp $LAUNCHER_JAR $LAUNCHER_NAME”</p>
-
-          
+          参考：http://www.jianshu.com/p/367f0886e62bhttps://source.android.com/source/initializinghttps://mirrors.tuna.tsinghua.edu.cn/help/AOSP/
+1、环境相关首先保证电脑配置要够
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -762,46 +745,18 @@ Debug.stopMethodTracing()</code></li>
       
         
           
-            <p>#引子<br>最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2695326-5aea0c019bcd1489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580" alt="首页.png"><br>上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2695326-f4a01fca4956ad26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580" alt="首页_滚动.png"><br>因此推荐页有大量的图片，占用了大量的内存，需要做如下优化</p>
-<p>#优化项<br>1.进入推荐页时，只加载Scrollview中可见的图片<br>2.离开推荐页时，释放Scrollview中不可见的图片<br>3.点击图片进入详情页后，释放全部图片<br>4.Scrollview滚动时只加载可见的图片</p>
-<p>#技术点<br>1.如何判断Fragment是否对用户可见</p>
-<blockquote>
-<p> 最容易想到的就是通过生命周期函数<code>onPause()</code>和<code>onResume()</code>来判断，但是在此viewpager中切换fragment，却未触发这两个生命周期函数。因为viewpager会默认加载当前页的前后页，而且还可通过<code>setOffscreenPageLimit</code>来设置默认加载多页。那有什么办法知道Fragment是否对用户可见呢？有的，具体分几种情况</p>
-<ul>
-<li>ViewPager+Fragment<br>因为Fragment懒加载机制的原因，切换时Fragment并未销毁，不会触发<code>onPause()</code>，因此需要用<code>setUserVisibleHint()</code>来判断<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">    * Set a hint to the system about whether this fragment&apos;s UI is currently visible</span><br><span class="line">    * to the user. This hint defaults to true and is persistent across fragment instance</span><br><span class="line">    * state save and restore.</span><br><span class="line">    *</span><br><span class="line">    * &lt;p&gt;An app may set this to false to indicate that the fragment&apos;s UI is</span><br><span class="line">    * scrolled out of visibility or is otherwise not directly visible to the user.</span><br><span class="line">    * This may be used by the system to prioritize operations such as fragment lifecycle updates</span><br><span class="line">    * or loader ordering behavior.&lt;/p&gt;</span><br><span class="line">    *</span><br><span class="line">    * &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This method may be called outside of the fragment lifecycle.</span><br><span class="line">    * and thus has no ordering guarantees with regard to fragment lifecycle method calls.&lt;/p&gt;</span><br><span class="line">    *</span><br><span class="line">    * @param isVisibleToUser true if this fragment&apos;s UI is currently visible to the user (default),</span><br><span class="line">    *                        false if it is not.</span><br><span class="line">    */</span><br><span class="line">   public void setUserVisibleHint(boolean isVisibleToUser) &#123;</span><br><span class="line">       if (!mUserVisibleHint &amp;&amp; isVisibleToUser &amp;&amp; mState &lt; STARTED</span><br><span class="line">               &amp;&amp; mFragmentManager != null &amp;&amp; isAdded()) &#123;</span><br><span class="line">           mFragmentManager.performPendingDeferredStart(this);</span><br><span class="line">       &#125;</span><br><span class="line">       mUserVisibleHint = isVisibleToUser;</span><br><span class="line">       mDeferStart = mState &lt; STARTED &amp;&amp; !isVisibleToUser;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<p><strong>ViewPager初始化时不会触发<code>setUserVisibleHint()</code>，只会在切换Fragment时</strong></p>
-<ul>
-<li>Activity+Fragment<br>xml引入fragment，或者通过<code>addFragment</code>、<code>replaceFragment</code>，直接判断<code>onPause()</code>和<code>onResume()</code>即可    </li>
-<li>FragmentManger show() hide()<br>fragment没有被销毁，虽然不可见，但是不会触发<code>onPause</code>，需要用<code>onHiddenChanged()</code>来判断<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onHiddenChanged(boolean hidden) &#123;</span><br><span class="line">    super.onHiddenChanged(hidden);</span><br><span class="line">    if(hidden)&#123;</span><br><span class="line">        //TODO now visible to user</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        //TODO now invisible to user</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>2.如何判断View是否可见</p>
-<blockquote>
-<p> 判断View是否在屏幕中可见，可使用如下函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">     * 判断视图是否显示在屏幕上</span><br><span class="line">     * @param context</span><br><span class="line">     * @param view</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static boolean checkIsVisible(Context context, View view) &#123;</span><br><span class="line">        int screenWidth = getScreenMetrics(context).x;</span><br><span class="line">        int screenHeight = getScreenMetrics(context).y;</span><br><span class="line">        Rect rect = new Rect(0, 0, screenWidth, screenHeight);</span><br><span class="line">        int[] location = new int[2];</span><br><span class="line">        view.getLocationInWindow(location);</span><br><span class="line">        if (view.getLocalVisibleRect(rect)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //view已不在屏幕可见区域;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>3.如何判断View是否在ScrollView中可见</p>
-<blockquote>
-<p> 判断View是否在ScrollView中可见，可使用如下函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private boolean isVisibleInScrollView(ScrollView scroll, View view) &#123;</span><br><span class="line">        Rect bounds = new Rect();</span><br><span class="line">        view.getHitRect(bounds);</span><br><span class="line">        Rect scrollBounds = new Rect(scroll.getScrollX(), scroll.getScrollY(),</span><br><span class="line">                scroll.getScrollX() + scroll.getWidth(), scroll.getScrollY() + scroll.getHeight());</span><br><span class="line">        if (Rect.intersects(scrollBounds, bounds)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>4.如何控制图片加载</p>
-<blockquote>
-<p> 控制图片加载我们不能直接使用<code>View.setVisibility(View.VISIBLE|VIew.GONE)</code>，否则会视图需要重新渲染，引起操作时的卡顿。<br>我们可以通过发送<code>dispatchDisplayHint(int hint)</code>，然后在View中处理<code>onDisplayHint(int hint)</code>来控制图片加载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">     * Dispatch a hint about whether this view is displayed. For instance, when</span><br><span class="line">     * a View moves out of the screen, it might receives a display hint indicating</span><br><span class="line">     * the view is not displayed. Applications should not &lt;em&gt;rely&lt;/em&gt; on this hint</span><br><span class="line">     * as there is no guarantee that they will receive one.</span><br><span class="line">     *</span><br><span class="line">     * @param hint A hint about whether or not this view is displayed:</span><br><span class="line">     * &#123;@link #VISIBLE&#125; or &#123;@link #INVISIBLE&#125;.</span><br><span class="line">     */</span><br><span class="line">    public void dispatchDisplayHint(int hint) &#123;</span><br><span class="line">        onDisplayHint(hint);</span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * Gives this view a hint about whether is displayed or not. For instance, when</span><br><span class="line">     * a View moves out of the screen, it might receives a display hint indicating</span><br><span class="line">     * the view is not displayed. Applications should not &lt;em&gt;rely&lt;/em&gt; on this hint</span><br><span class="line">     * as there is no guarantee that they will receive one.</span><br><span class="line">     *</span><br><span class="line">     * @param hint A hint about whether or not this view is displayed:</span><br><span class="line">     * &#123;@link #VISIBLE&#125; or &#123;@link #INVISIBLE&#125;.</span><br><span class="line">     */</span><br><span class="line">    protected void onDisplayHint(int hint) &#123;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>#具体优化工作<br>1.进入推荐页时，只加载Scrollview中可见的图片</p>
-<blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line"> public void onResume() &#123;</span><br><span class="line">     super.onResume();</span><br><span class="line">     Logger.getLogger().d(&quot;onResume&quot;);</span><br><span class="line">     if (getUserVisibleHint()) &#123;</span><br><span class="line">         setScrollVisibleView();</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> private void setScrollVisibleView() &#123;</span><br><span class="line">     if (mRecommendContainerLayout == null) &#123;</span><br><span class="line">         return;</span><br><span class="line">     &#125;</span><br><span class="line">     for (int i = 0; i &lt; mRecommendContainerLayout.getChildCount(); i++) &#123;</span><br><span class="line">         final RecommendContainer recommendContainer = (RecommendContainer) mRecommendContainerLayout.getChildAt(i);</span><br><span class="line">         if (isVisibleInScrollView(mScrollView, recommendContainer)) &#123;</span><br><span class="line">             Logger.getLogger().d(&quot;setScrollVisibleView v=%s,vi=%s&quot;, recommendContainer, View.VISIBLE);</span><br><span class="line">             recommendContainer.dispatchDisplayHint(View.VISIBLE);</span><br><span class="line">         &#125; else &#123;</span><br><span class="line">             //Logger.getLogger().d(&quot;setScrollVisibleView v=%s,vi=%s&quot;, recommendContainer, View.GONE);</span><br><span class="line">             //recommendContainer.dispatchDisplayHint(View.INVISIBLE);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>2.离开推荐页时，释放Scrollview中不可见的图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void setUserVisibleHint(final boolean isVisibleToUser) &#123;</span><br><span class="line">    super.setUserVisibleHint(isVisibleToUser);</span><br><span class="line">    Logger.getLogger().d(&quot;setUserVisibleHint, isVisibleToUser=%s&quot;, isVisibleToUser);</span><br><span class="line">    if (mRecommendContainerLayout == null) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 0; i &lt; mRecommendContainerLayout.getChildCount(); i++) &#123;</span><br><span class="line">        final RecommendContainer recommendContainer = (RecommendContainer) mRecommendContainerLayout.getChildAt(i);</span><br><span class="line">        final boolean isVisibleInScrollView = isVisibleInScrollView(mScrollView, recommendContainer);</span><br><span class="line">        Logger.getLogger().d(&quot;setUserVisibleHint v=%s,isVisibleToUser=%s,isVisibleInScrollView=%s,&quot; +</span><br><span class="line">                        &quot;checkIsVisible=%s&quot;, recommendContainer.getId(), isVisibleToUser, isVisibleInScrollView,</span><br><span class="line">                ViewUtils.checkIsVisible(getContext(), recommendContainer));</span><br><span class="line">        recommendContainer.dispatchDisplayHint( isVisibleInScrollView ? View.VISIBLE :</span><br><span class="line">                View.GONE);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3.点击图片进入详情页后，释放全部图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onPause() &#123;</span><br><span class="line">    super.onPause();</span><br><span class="line">    Logger.getLogger().d(&quot;onPause&quot;);</span><br><span class="line">    hideAllViews();</span><br><span class="line">&#125;</span><br><span class="line">private void hideAllViews() &#123;</span><br><span class="line">    if (mRecommendContainerLayout == null) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 0; i &lt; mRecommendContainerLayout.getChildCount(); i++) &#123;</span><br><span class="line">        final RecommendContainer recommendContainer = (RecommendContainer) mRecommendContainerLayout.getChildAt(i);</span><br><span class="line">        Logger.getLogger().d(&quot;hideAllViews v=%s,vi=%s&quot;, recommendContainer, View.GONE);</span><br><span class="line">        mRecommendContainerLayout.postDelayed(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                recommendContainer.dispatchDisplayHint(View.INVISIBLE);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, 300);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>4.Scrollview滚动时只加载可见的图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onScrollChanged(ScrollView scrollView, int x, int y, int oldx, int oldy) &#123;</span><br><span class="line">    if (Math.abs(oldy - y) &gt; 50) &#123;</span><br><span class="line">        //Logger.getLogger().d(&quot;recommendFragment setScrollVisibleView&quot;);</span><br><span class="line">        setScrollVisibleView();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>#参考<br><a href="http://blog.csdn.net/applicaton/article/details/51804675" target="_blank" rel="noopener">关于fragment到底是否可见的问题</a><br><a href="http://www.cnblogs.com/dongweiq/p/5411899.html" target="_blank" rel="noopener">如何判断Fragment是否对用户可见</a><br><a href="http://stackoverflow.com/questions/4628800/android-how-to-check-if-a-view-inside-of-scrollview-is-visible" target="_blank" rel="noopener">Android: how to check if a View inside of ScrollView is visible?</a></p>
-
-          
+          #引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。
+上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动
+因此推荐页有大量的图片，占用了大量的内存，需要做如下优化
+#优化项1.进入推荐页时，只加载Scrollview中可见的图片2.
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/19/Android/判断Fragment是否对用户可见/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -929,17 +884,15 @@ Debug.stopMethodTracing()</code></li>
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/19/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
