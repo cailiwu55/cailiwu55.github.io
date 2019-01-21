@@ -329,12 +329,9 @@
 
       
         
-          
-          
-通过Memory Monitor 查找内存泄漏Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况
-
-这个图是从主页反复进入选择APP页面过程抓取的heap dump信息，通过搜索Se
-          ...
+          <ol>
+<li>通过Memory Monitor 查找内存泄漏<br>Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况<br><img src="http://upload-images.jianshu.io/upload_images/2695326-5b0bd9f7b33776b3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
+</ol>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/19/Android/Android性能分析的几种方法/#more" rel="contents">
@@ -468,12 +465,7 @@
 
       
         
-          
-          UML图是理解面向对象语言代码的利器。在开发中经常会使用到一些第三方库，在文档缺失的情况下，想快速了解代码结构，可以通过工具快速生成UML图来加速理解。我常用的开发工具是android studio，它有一个插件叫做simpleUML，可以很方便的生成UML图。
-#理解UML
-
-uml图里面有6种关
-          ...
+          <p>UML图是理解面向对象语言代码的利器。在开发中经常会使用到一些第三方库，在文档缺失的情况下，想快速了解代码结构，可以通过工具快速生成UML图来加速理解。<br>我常用的开发工具是android studio，它有一个插件叫做simpleUML，可以很方便的生成UML图。<br><img src="https://upload-images.jianshu.io/upload_images/2695326-6abec69f1b96d2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AndroidShowClassDiagram.png"><br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/19/Android/UML图理解/#more" rel="contents">
@@ -483,7 +475,7 @@ uml图里面有6种关
           <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
@@ -607,10 +599,8 @@ uml图里面有6种关
 
       
         
-          
-          参考：http://www.jianshu.com/p/367f0886e62bhttps://source.android.com/source/initializinghttps://mirrors.tuna.tsinghua.edu.cn/help/AOSP/
-1、环境相关首先保证电脑配置要够
-          ...
+          <p>参考：<br><a href="http://www.jianshu.com/p/367f0886e62b" target="_blank" rel="noopener">http://www.jianshu.com/p/367f0886e62b</a><br><a href="https://source.android.com/source/initializing" target="_blank" rel="noopener">https://source.android.com/source/initializing</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/</a></p>
+<p>1、环境相关<br>首先保证电脑配置要够，cpu最好是4核以上的，因为编译的时候很耗费cpu，如果是4核双线程的，编译的时候可以起16个线程，make -j16，大大加快编译速度<br>其次就是内存，最好是16G，如果是在虚拟机里面编译的话要开始swap分区，大小要超过16G<br>最后就是硬盘，如果只编译一个版本的话150G是要得，多版本就200G+了。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/19/Android/Ubuntu14-04-Android-源码编译相关/#more" rel="contents">
@@ -620,7 +610,7 @@ uml图里面有6种关
           <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
@@ -744,12 +734,8 @@ uml图里面有6种关
 
       
         
-          
-          #引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。
-上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动
-因此推荐页有大量的图片，占用了大量的内存，需要做如下优化
-#优化项1.进入推荐页时，只加载Scrollview中可见的图片2.
-          ...
+          <p>#引子<br>最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2695326-5aea0c019bcd1489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580" alt="首页.png"><br>上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/19/Android/判断Fragment是否对用户可见/#more" rel="contents">
@@ -759,7 +745,7 @@ uml图里面有6种关
           <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
@@ -884,15 +870,17 @@ uml图里面有6种关
       
         
           
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/19/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+          
         
       
     </div>

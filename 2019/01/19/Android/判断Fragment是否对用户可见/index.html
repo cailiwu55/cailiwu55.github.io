@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动 因此推荐页有大量的图片，占用了大量的内存，需要做如下优化 #优化项1.进入推荐页时，只加载Scrollview中可见的图片2.离开推荐页时，释放Scrollview中不可见的图片3.点击图片进入详情页后，释放全部图片4.Scr">
+<meta name="description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="判断Fragment是否对用户可见">
 <meta property="og:url" content="http://cailiwu.cn/2019/01/19/Android/判断Fragment是否对用户可见/index.html">
 <meta property="og:site_name" content="碎语说">
-<meta property="og:description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动 因此推荐页有大量的图片，占用了大量的内存，需要做如下优化 #优化项1.进入推荐页时，只加载Scrollview中可见的图片2.离开推荐页时，释放Scrollview中不可见的图片3.点击图片进入详情页后，释放全部图片4.Scr">
+<meta property="og:description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-5aea0c019bcd1489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-f4a01fca4956ad26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
-<meta property="og:updated_time" content="2019-01-19T09:31:54.000Z">
+<meta property="og:updated_time" content="2019-01-21T07:53:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="判断Fragment是否对用户可见">
-<meta name="twitter:description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动 因此推荐页有大量的图片，占用了大量的内存，需要做如下优化 #优化项1.进入推荐页时，只加载Scrollview中可见的图片2.离开推荐页时，释放Scrollview中不可见的图片3.点击图片进入详情页后，释放全部图片4.Scr">
+<meta name="twitter:description" content="#引子最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。 上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2695326-5aea0c019bcd1489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
 
 
@@ -333,8 +333,7 @@
 
       
         <p>#引子<br>最近在做应用内存优化，首要考虑优化的就是首页推荐位的图片。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2695326-5aea0c019bcd1489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580" alt="首页.png"><br>上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2695326-f4a01fca4956ad26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580" alt="首页_滚动.png"><br>因此推荐页有大量的图片，占用了大量的内存，需要做如下优化</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2695326-5aea0c019bcd1489.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580" alt="首页.png"><br>上图Tab页是通过ViewPager+Fragment实现的，推荐页使用了Scrollview可以往下滚动<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/2695326-f4a01fca4956ad26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580" alt="首页_滚动.png"><br>因此推荐页有大量的图片，占用了大量的内存，需要做如下优化</p>
 <p>#优化项<br>1.进入推荐页时，只加载Scrollview中可见的图片<br>2.离开推荐页时，释放Scrollview中不可见的图片<br>3.点击图片进入详情页后，释放全部图片<br>4.Scrollview滚动时只加载可见的图片</p>
 <p>#技术点<br>1.如何判断Fragment是否对用户可见</p>
 <blockquote>

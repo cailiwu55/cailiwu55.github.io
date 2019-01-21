@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="通过Memory Monitor 查找内存泄漏Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况  这个图是从主页反复进入选择APP页面过程抓取的heap dump信息，通过搜索SelectAppActivity发现存在多个实例，存在内存泄漏无疑,要查找具体泄漏的原因需要用到mat">
+<meta name="description" content="通过Memory Monitor 查找内存泄漏Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android性能分析的几种方法">
 <meta property="og:url" content="http://cailiwu.cn/2019/01/19/Android/Android性能分析的几种方法/index.html">
 <meta property="og:site_name" content="碎语说">
-<meta property="og:description" content="通过Memory Monitor 查找内存泄漏Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况  这个图是从主页反复进入选择APP页面过程抓取的heap dump信息，通过搜索SelectAppActivity发现存在多个实例，存在内存泄漏无疑,要查找具体泄漏的原因需要用到mat">
+<meta property="og:description" content="通过Memory Monitor 查找内存泄漏Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-5b0bd9f7b33776b3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-0ff2814e4f690e01.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-479ead933e5a656b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-649221cb0088621d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2695326-3f0aa78574fcf539.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-01-19T09:26:19.000Z">
+<meta property="og:updated_time" content="2019-01-21T07:53:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android性能分析的几种方法">
-<meta name="twitter:description" content="通过Memory Monitor 查找内存泄漏Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况  这个图是从主页反复进入选择APP页面过程抓取的heap dump信息，通过搜索SelectAppActivity发现存在多个实例，存在内存泄漏无疑,要查找具体泄漏的原因需要用到mat">
+<meta name="twitter:description" content="通过Memory Monitor 查找内存泄漏Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2695326-5b0bd9f7b33776b3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -340,6 +340,7 @@
         <ol>
 <li>通过Memory Monitor 查找内存泄漏<br>Android Profiler中的Memory Monitor可以实时查看app的内存占用情况。通过操作app界面，抓取某段时间的heap dump分析内存泄漏情况<br><img src="http://upload-images.jianshu.io/upload_images/2695326-5b0bd9f7b33776b3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></li>
 </ol>
+<a id="more"></a>
 <p>这个图是从主页反复进入选择APP页面过程抓取的heap dump信息，通过搜索SelectAppActivity发现存在多个实例，存在内存泄漏无疑,要查找具体泄漏的原因需要用到mat工具。<br>将刚才的heap dump导出文件，然后通过android 命令行工具hprof-conv转换为标准的heap dump，导入mat查看<br><img src="http://upload-images.jianshu.io/upload_images/2695326-0ff2814e4f690e01.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
 <p>然后通过path to GC Roots找到引用路径，发现是EventBus未注销引起的泄漏<br><img src="http://upload-images.jianshu.io/upload_images/2695326-b036cdac0f803812.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2695326-d41f36abf614fd18.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
